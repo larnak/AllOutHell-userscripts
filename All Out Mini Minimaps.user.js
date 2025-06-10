@@ -101,7 +101,6 @@
             let cell = mapData[i][j];
             let td = document.createElement('td');
             td.className = 'custom-map-cell';
-            alert('"'+playerLocationName+'" and '+cell.name+'"');
             // Check if the current cell's name matches the player's location
             if (playerLocationName && cell.name === playerLocationName) {
                 // This is the player's current location, give it a special color
