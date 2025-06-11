@@ -26,7 +26,7 @@
     }
 
     // *** MODIFIED FUNCTION ***
-    // NEW: Function to extract the player's current location name from the "div.room" element
+    // NEW: Function to extract the player's current location name and coordinates from the "div.room" element
     function getCurrentLocationName() {
         // Find the div with the class "room"
         const locationElement = document.querySelector('div.room');
@@ -44,6 +44,58 @@
         }
         // If the element or the pattern is not found, return null
         return null;
+    }
+
+    // Function to extract coordinates from the location text
+    function getCurrentLocationCoordinates() {
+        const locationElement = document.querySelector('div.room');
+
+        if (locationElement) {
+            const fullText = locationElement.textContent; // e.g., "You are currently at Lynch Street. (514, 519)"
+
+            // Use a regular expression to extract coordinates in parentheses
+            const coordMatch = fullText.match(/\((\d+),\s*(\d+)\)/);
+
+            if (coordMatch) {
+                return {
+                    x: parseInt(coordMatch[1]),
+                    y: parseInt(coordMatch[2])
+                };
+            }
+        }
+        return null;
+    }
+
+    // Function to get player position - uses coordinates if available, otherwise name matching
+    function getPlayerPosition(suburb, mapData) {
+        const coordinates = getCurrentLocationCoordinates();
+        
+        if (coordinates) {
+            // If we have coordinates, calculate the position on the map
+            const suburbCoords = getSuburbCoordinates(suburb);
+            const relativeX = coordinates.x - suburbCoords.x;
+            const relativeY = coordinates.y - suburbCoords.y;
+            
+            // Check if the calculated position is within the map bounds
+            if (relativeY >= 0 && relativeY < mapData.length && 
+                relativeX >= 0 && relativeX < mapData[0].length) {
+                return { row: relativeY, col: relativeX };
+            }
+        }
+        
+        // Fall back to name matching if coordinates aren't available or are out of bounds
+        const playerLocationName = getCurrentLocationName();
+        if (playerLocationName) {
+            for (let i = 0; i < mapData.length; i++) {
+                for (let j = 0; j < mapData[i].length; j++) {
+                    if (mapData[i][j].name === playerLocationName) {
+                        return { row: i, col: j };
+                    }
+                }
+            }
+        }
+        
+        return null; // Player position not found
     }
 
     // Create the map container
@@ -79,13 +131,15 @@
 
     // Create the map grid based on current suburb
     let currentSuburb = getCurrentSuburbName();
-    let playerLocationName = getCurrentLocationName(); // Get player's location
     let mapData = getMapDataForSuburb(currentSuburb);
 
     if (!mapData) {
         console.error('Map data not found for suburb:', currentSuburb);
         return;
     }
+
+    // Get player's position using coordinates or name matching
+    let playerPosition = getPlayerPosition(currentSuburb, mapData);
 
     let mapGrid = document.createElement('table');
     mapGrid.id = 'custom-map-grid';
@@ -102,8 +156,8 @@
             let cell = mapData[i][j];
             let td = document.createElement('td');
             td.className = 'custom-map-cell';
-            // Check if the current cell's name matches the player's location
-            if (playerLocationName && cell.name === playerLocationName) {
+            // Check if this is the player's current position
+            if (playerPosition && playerPosition.row === i && playerPosition.col === j) {
                 // This is the player's current location, give it a special color
                 td.style.backgroundColor = '#FF00FF'; // Bright pink/magenta
                 td.style.border = '2px solid #000000'; // Extra border to make it pop
