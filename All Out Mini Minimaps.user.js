@@ -133,19 +133,19 @@
     function getSuburbCoordinates(suburb) {
         switch (suburb) {
             case 'Roja':
-                return { x: 500, y: 500 }; // TODO: Replace with actual coordinates
+                return { x: 500, y: 490 };
             case 'Elgin':
-                return { x: 510, y: 500 }; // TODO: Replace with actual coordinates
+                return { x: 500, y: 500 };
             case 'Beachwood':
-                return { x: 520, y: 500 }; // TODO: Replace with actual coordinates
+                return { x: 510, y: 500 };
             case 'Fairview Heights':
-                return { x: 530, y: 500 }; // TODO: Replace with actual coordinates
+                return { x: 500, y: 510 };
             case 'Rockwell':
-                return { x: 540, y: 500 }; // TODO: Replace with actual coordinates
+                return { x: 510, y: 510 }; 
             case 'Mulston':
-                return { x: 550, y: 500 }; // TODO: Replace with actual coordinates
+                return { x: 520, y: 510 };
             case 'Glimmer Fields':
-                return { x: 560, y: 500 }; // TODO: Replace with actual coordinates
+                return { x: 520, y: 500 };
             default:
                 return { x: 0, y: 0 }; // Default coordinates
         }
