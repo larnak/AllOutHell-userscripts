@@ -112,7 +112,9 @@
                 td.style.backgroundColor = getColorByType(cell.type);
             }
 
-            td.title = cell.name; // This line sets the tooltip text to display on mouseover
+            // Calculate coordinates for this cell
+            const coords = getCellCoordinates(currentSuburb, i, j);
+            td.title = `${cell.name} (${coords.x}, ${coords.y})`; // Show name and coordinates in tooltip
             td.textContent = ''; // This line ensures the cell is blank
 
             // Make the cell clickable and link it to the wiki in a new window
@@ -125,6 +127,37 @@
             tr.appendChild(td);
         }
         mapGrid.appendChild(tr);
+    }
+
+    // Function to get suburb coordinates (top-left corner)
+    function getSuburbCoordinates(suburb) {
+        switch (suburb) {
+            case 'Roja':
+                return { x: 500, y: 500 }; // TODO: Replace with actual coordinates
+            case 'Elgin':
+                return { x: 510, y: 500 }; // TODO: Replace with actual coordinates
+            case 'Beachwood':
+                return { x: 520, y: 500 }; // TODO: Replace with actual coordinates
+            case 'Fairview Heights':
+                return { x: 530, y: 500 }; // TODO: Replace with actual coordinates
+            case 'Rockwell':
+                return { x: 540, y: 500 }; // TODO: Replace with actual coordinates
+            case 'Mulston':
+                return { x: 550, y: 500 }; // TODO: Replace with actual coordinates
+            case 'Glimmer Fields':
+                return { x: 560, y: 500 }; // TODO: Replace with actual coordinates
+            default:
+                return { x: 0, y: 0 }; // Default coordinates
+        }
+    }
+
+    // Function to get coordinates for a specific cell
+    function getCellCoordinates(suburb, row, col) {
+        const suburbCoords = getSuburbCoordinates(suburb);
+        return {
+            x: suburbCoords.x + col,
+            y: suburbCoords.y + row
+        };
     }
 
     // Function to get map data based on suburb
