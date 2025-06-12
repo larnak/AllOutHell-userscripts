@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         All Out Mini Minimaps
 // @namespace    https://github.com/larnak/AllOutHell-userscripts
-// @version      11
+// @version      11.1
 // @description  A horrible minimap, ugly yet effective and smaller. Now with player position!
 // @author       Someone Who Isnt Me (with modifications from larnak)
 // @match        https://www.allouthell.com/game.php
 // @match        https://allouthell.com/game.php
+// @updateURL    https://github.com/larnak/AllOutHell-userscripts/blob/main/All%20Out%20Mini%20Minimaps.user.js
 // @grant        none
 // ==/UserScript==
 
@@ -361,6 +362,7 @@
             case 'sushi': return '#B0B0B0';
             case 'apothecary': return '#B0B0B0';
             case 'storage': return '#DAA520';
+            case 'transport': return '#000000';
             default: return '#FFFFFF';
         }
     }
