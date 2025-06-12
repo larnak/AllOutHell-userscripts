@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         All Out Mini Minimaps
 // @namespace    https://github.com/larnak/AllOutHell-userscripts
-// @version      11.3
+// @version      11.4
 // @description  A horrible minimap, ugly yet effective and smaller. Now with player position!
 // @author       Someone Who Isnt Me (with modifications from larnak)
 // @match        https://www.allouthell.com/game.php
