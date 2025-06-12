@@ -7,6 +7,7 @@
 // @match        https://www.allouthell.com/game.php
 // @match        https://allouthell.com/game.php
 // @updateURL    https://github.com/larnak/AllOutHell-userscripts/blob/main/All%20Out%20Mini%20Minimaps.user.js
+// @downloadURL    https://github.com/larnak/AllOutHell-userscripts/blob/main/All%20Out%20Mini%20Minimaps.user.js
 // @grant        none
 // ==/UserScript==
 
